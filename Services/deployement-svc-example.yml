@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: deployement-svc-example
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: svc-example
+  template:
+    metadata:
+      labels:
+        app: svc-example
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.19.1
+        ports:
+        - containerPort: 80

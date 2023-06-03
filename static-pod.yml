@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: static-pod
+spec:
+  containers:
+    - name: nginx
+      image: nginx:1.19.1
+Explaination:
+Static Pods are just like any other object created in Kubernetes. They are created
+in the same way as any other object, but they are created on the node itself. The
+kubelet running on the node monitors the directory /etc/kubernetes/manifests for
+any changes. If it finds any changes, it creates the object in the API server. If
+the object already exists, it updates the object in the API server. If the object
+is deleted from the API server, it is also deleted from the node.

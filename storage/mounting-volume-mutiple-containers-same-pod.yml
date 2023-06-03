@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volume-pod
+spec:
+  containers:
+    - name: buxybox1
+      image: busybox
+      volumeMounts:
+        - name: my-volume
+          mountPath: /output
+    - name: buxybox2
+      image: busybox
+      volumeMounts:
+        - name: my-volume
+          mountPath: /input
+  volumes:
+    - name: my-volume
+      emptyDir: {}

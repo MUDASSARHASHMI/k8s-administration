@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: shared-volume-pod
+spec:
+  containers:
+  - name: busybox1
+    image: busybox
+    command: ['sh', '-c', "while true; do echo Success! > /output/output.txt; sleep 5; done"]
+    volumeMounts:
+      - name: my-volume
+        mountPath: /output
+  - name: busybox2
+    image: busybox
+    command: ['sh', '-c', "while true; do cat /input/output.txt; sleep 5; done"]
+    volumeMounts:
+      - name: my-volume
+        mountPath: /input
+    volumes:
+    - name: my-volume
+      emptyDir: {}
+Explaination:
+  If we see message from the first container and the second container it will be confirmed that 
+    both containers are sharing the same volume by busybox1 as writing busybo2 as reading.
+# Command for the first container "kubectl logs sahred-volume-pod -c busybox1"
+# Command for second container"kubectl logs sahred-volume-pod -c busybox2"
